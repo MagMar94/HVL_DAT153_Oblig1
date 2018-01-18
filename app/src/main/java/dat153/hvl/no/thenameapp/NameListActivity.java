@@ -22,10 +22,10 @@ public class NameListActivity extends AppCompatActivity {
         list = new ArrayList<String>();
         ListView listView = (ListView) findViewById(R.id.list_View);
 
-        HashMap<String, Integer> studentList = MainActivity.mStudentList;
+        HashMap<Integer, String> studentList = People.getInstance().mPeopleMap;
         final String[] names = new String[studentList.size()];
         int i = 0;
-        for(String s : studentList.keySet()) {
+        for(String s : studentList.values()) {
             names[i] = s;
             i++;
         }

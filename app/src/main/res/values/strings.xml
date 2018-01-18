@@ -3,4 +3,5 @@
     <string name="name_list_button_text">List of names</string>
     <string name="image_list_button_text">Image gallery</string>
     <string name="learning_mode_button_text">Learning mode</string>
+    <string name="add_new_person_button_text">Add new person</string>
 </resources>

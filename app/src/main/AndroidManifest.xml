@@ -25,7 +25,11 @@
             android:name=".ImageGalleryActivity"
             android:parentActivityName=".MainActivity">
         </activity>
-        <activity android:name=".LearningModeActivity">
+        <activity android:name=".LearningModeActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".AddPersonActivity"
+            android:parentActivityName=".NameListActivity">
         </activity>
     </application>
 

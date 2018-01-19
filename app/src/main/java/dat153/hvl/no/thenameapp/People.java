@@ -1,6 +1,8 @@
 package dat153.hvl.no.thenameapp;
 
 import android.app.Application;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,23 +22,11 @@ class People extends Application {
     /**
      * The HashMap containing the names and image
      */
-    public HashMap<Integer, String> mPeopleMap;
-
-    /**
-     * @return the instance
-     */
-    static People getInstance() {
-        return mInstance;
-    }
+    public HashMap<Drawable, String> mPeopleMap;
 
     private People() {
         mPeopleMap = new HashMap<>();
-        initiateStudentList();
     }
 
-    private void initiateStudentList() {
-        mPeopleMap.put(R.drawable.rabbit1, "Stephanie Marthinussen");
-        mPeopleMap.put(R.drawable.rabbit4, "Magnus Marthinsen");
-        mPeopleMap.put(R.drawable.rabbit3, "Adrian Storm-Johannessen");
-    }
+
 }

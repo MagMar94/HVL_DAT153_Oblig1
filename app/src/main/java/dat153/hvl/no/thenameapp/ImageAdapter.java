@@ -1,6 +1,8 @@
 package dat153.hvl.no.thenameapp;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -24,7 +26,7 @@ class ImageAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return mThumbIds.length;
+        return People.mInstance.mPeopleMap.keySet().size();
     }
 
     public Object getItem(int position) {
@@ -48,18 +50,8 @@ class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(mThumbIds[position]);
+        //imageView.setImageResource(mThumbIds[position]);
+        imageView.setImageDrawable((Drawable) People.mInstance.mPeopleMap.keySet().toArray()[position]);
         return imageView;
     }
-
-    // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.rabbit1, R.drawable.rabbit2,
-            R.drawable.rabbit3, R.drawable.rabbit4,
-            R.drawable.rabbit5, R.drawable.rabbit6,
-            R.drawable.rabbit7, R.drawable.rabbit8,
-            R.drawable.rabbit9, R.drawable.rabbit10,
-            R.drawable.rabbit11, R.drawable.rabbit12,
-            R.drawable.rabbit13
-    };
 }

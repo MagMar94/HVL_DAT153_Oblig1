@@ -3,55 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="81dp">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="95dp"
-        android:layout_marginEnd="63dp"
-        android:layout_marginStart="63dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="67dp"
+        android:layout_marginStart="67dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/nameInputText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside"
         app:srcCompat="@drawable/ic_launcher_background" />
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/takePictureButton"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="177dp"
-        android:layout_marginEnd="65dp"
-        android:layout_marginStart="65dp"
-        android:text="TextView"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="67dp"
+        android:layout_marginStart="67dp"
+        android:onClick="takePictureOfPerson"
+        android:text="@string/take_picture_button_text"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameInputText" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="67dp"
+        android:layout_marginStart="67dp"
+        android:text="@string/save_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/takePictureButton" />
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/nameInputText"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginLeft="9dp"
-        android:onClick="takePictureOfPerson"
-        android:text="@string/take_picture_button_text"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintStart_toStartOf="@+id/textView"
+        android:layout_marginBottom="54dp"
+        android:ems="10"
+        android:inputType="textPersonName|textCapWords"
+        android:text="@string/add_person_name_default_text"
+        app:layout_constraintBottom_toTopOf="@+id/takePictureButton"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        android:text="@string/save_button_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/button4"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
 </android.support.constraint.ConstraintLayout>

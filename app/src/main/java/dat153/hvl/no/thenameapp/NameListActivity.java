@@ -23,6 +23,15 @@ public class NameListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_name_list);
 
+        fillList();
+    }
+
+    public void loadAddPersonAcitivity(View v) {
+        Intent startNewActivity = new Intent(this, AddPersonActivity.class);
+        startActivity(startNewActivity);
+    }
+
+    private void fillList(){
         list = new ArrayList<String>();
         ListView listView = (ListView) findViewById(R.id.list_View);
         HashMap<Drawable, String> studentList = People.mInstance.mPeopleMap;
@@ -39,9 +48,10 @@ public class NameListActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-    public void loadAddPersonAcitivity(View v) {
-        Intent startNewActivity = new Intent(this, AddPersonActivity.class);
-        startActivity(startNewActivity);
+    @Override
+    protected void onResume(){
+        super.onResume();
+        fillList();
     }
 
 }

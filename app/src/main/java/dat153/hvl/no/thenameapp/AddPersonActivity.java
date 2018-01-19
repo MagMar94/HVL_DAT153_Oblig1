@@ -69,6 +69,7 @@ public class AddPersonActivity extends AppCompatActivity {
         String inputName = inputTextView.getText().toString();
         BitmapDrawable image = new BitmapDrawable(getResources(), imageBitmap);
         People.mInstance.mPeopleMap.put(image,inputName);
+        finish();
     }
 
 

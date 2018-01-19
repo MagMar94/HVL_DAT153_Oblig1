@@ -1,8 +1,10 @@
 package dat153.hvl.no.thenameapp;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -19,12 +21,20 @@ public class NameListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_name_list); //TODO : Create new view
+        setContentView(R.layout.activity_name_list);
 
+        fillList();
+    }
+
+    public void loadAddPersonAcitivity(View v) {
+        Intent startNewActivity = new Intent(this, AddPersonActivity.class);
+        startActivity(startNewActivity);
+    }
+
+    private void fillList(){
         list = new ArrayList<String>();
         ListView listView = (ListView) findViewById(R.id.list_View);
-
-        HashMap<Integer, String> studentList = People.getInstance().mPeopleMap;
+        HashMap<Drawable, String> studentList = People.mInstance.mPeopleMap;
         final String[] names = new String[studentList.size()];
         int i = 0;
         for(String s : studentList.values()) {
@@ -36,12 +46,12 @@ public class NameListActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listNames);
 
         listView.setAdapter(adapter);
-
     }
 
-    public void loadAddPersonAcitivity(View v) {
-        Intent startNewActivity = new Intent(this, AddPersonActivity.class);
-        startActivity(startNewActivity);
+    @Override
+    protected void onResume(){
+        super.onResume();
+        fillList();
     }
 
 }

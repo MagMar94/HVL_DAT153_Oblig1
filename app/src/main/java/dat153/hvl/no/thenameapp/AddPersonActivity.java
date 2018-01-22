@@ -3,6 +3,7 @@ package dat153.hvl.no.thenameapp;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -67,9 +68,56 @@ public class AddPersonActivity extends AppCompatActivity {
         TextView inputTextView = findViewById(R.id.nameInputText);
         String inputName = inputTextView.getText().toString();
         BitmapDrawable image = new BitmapDrawable(getResources(), imageBitmap);
-        People.mInstance.mPeopleMap.put(image,inputName);
-        finish();
+        if(userInformationIsValid(inputName,image)){
+            People.mInstance.mPeopleMap.put(image,inputName);
+            finish(); //returns to previous activity
+        } else {
+            TextView errorText = (TextView)findViewById(R.id.addPersonErrorTextView);
+            if(!isValidImage(image) && !isValidName(inputName)){ //both name and image is invalid
+                errorText.setText(getResources().getText(R.string.invalid_name_and_image_error));
+            } else if (!isValidImage(image)){ //only image is invalid
+                errorText.setText(getResources().getText(R.string.invalid_image_error));
+            } else { //only name is invalid
+                errorText.setText(getResources().getText(R.string.invalid_name_error));
+            }
+        }
     }
 
+    /**
+     * Checks that the user information is valid
+     * @param name
+     * @param image
+     * @return true if all the information is valid
+     */
+    private boolean userInformationIsValid(String name, Drawable image){
+        return isValidName(name) && isValidImage(image);
+    }
 
+    /**
+     * Checks that the name is valid.
+     *
+     * @param name
+     * @return true if tha name is valid
+     */
+    private boolean isValidName(String name){
+        Log.d("is name valid", name.toString());
+        return name != null && !name.equals("") && !name.equals(getResources().getText(R.string.add_person_name_default_text));
+    }
+
+    /**
+     * Checks that the image is valid
+     *
+     * @param image
+     * @return true if the image is valid
+     */
+    private boolean isValidImage(Drawable image){
+        Log.d("is image valid", image.toString());
+        if(Drawable.class.isAssignableFrom(BitmapDrawable.class)){
+            BitmapDrawable bitmapImage = (BitmapDrawable)image;
+            return bitmapImage.getBitmap() != null;
+        } else {
+            return  image != null;
+        }
+
+    }
 }

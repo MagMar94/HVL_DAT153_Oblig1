@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     tools:layout_editor_absoluteY="81dp">
 
     <ImageView
@@ -26,9 +29,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="135dp"
         android:layout_marginEnd="17dp"
-        android:layout_marginRight="17dp"
+        android:defaultFocusHighlightEnabled="false"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:focusedByDefault="false"
+        android:inputType="textPersonName|textCapWords"
+        android:selectAllOnFocus="true"
         android:text="@string/default_name_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/randomPicture" />
@@ -38,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
+        android:focusableInTouchMode="false"
         android:onClick="submit"
         android:text="@string/answer_button_text"
         app:layout_constraintStart_toStartOf="@+id/guessText"

@@ -1,12 +1,14 @@
 package dat153.hvl.no.thenameapp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +32,12 @@ public class LearningModeActivity extends AppCompatActivity {
     }
 
     public void submit(View v) {
+
+        /*if (v != null){ //hides the on screen keyboard
+            InputMethodManager inputs = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputs.hideSoftInputFromWindow(v.getWindowToken(),0);
+        }*/
+
         String guessedName = getTheGuess(v);
         Boolean ressult = compareTo(correctName, guessedName);
         totaleNumberOfGuesses = totaleNumberOfGuesses+1;

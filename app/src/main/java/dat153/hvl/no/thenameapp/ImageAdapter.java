@@ -30,7 +30,7 @@ class ImageAdapter extends BaseAdapter {
     }
 
     public Object getItem(int position) {
-        return null; //should return the item
+        return People.mInstance.mPeopleMap.keySet().toArray()[position];
     }
 
     public long getItemId(int position) {

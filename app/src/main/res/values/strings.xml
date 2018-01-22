@@ -10,4 +10,9 @@
     <string name="invalid_name_error">Invalid name</string>
     <string name="invalid_image_error">Invalid image</string>
     <string name="invalid_name_and_image_error">Invalid name and image</string>
+    <string name="default_name_text">Guess who?</string>
+    <string name="answer_button_text">Answer</string>
+    <string name="quit_button_text">Quit</string>
+    <string name="quit_dialog_title">Your Score: </string>
+    <string name="ok">OK</string>
 </resources>

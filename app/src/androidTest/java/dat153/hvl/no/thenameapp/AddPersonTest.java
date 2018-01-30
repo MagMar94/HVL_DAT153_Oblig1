@@ -4,19 +4,14 @@ import android.app.Activity;
 import android.app.Instrumentation;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.MediaStore;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
-import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
-import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.widget.Button;
-import android.widget.ImageView;
 
-import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,14 +20,14 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.action.ViewActions.typeTextIntoFocusedView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.Intents.intending;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasAction;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasData;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.isInternal;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.core.IsNot.not;
 
@@ -41,10 +36,6 @@ import static org.hamcrest.core.IsNot.not;
  */
 @RunWith(AndroidJUnit4.class)
 public class AddPersonTest {
-
-    //@Rule
-    //public ActivityTestRule<MainActivity> mainActivityActivityTestRule = new ActivityTestRule<MainActivity>(MainActivity.class);
-
     @Rule
     public IntentsTestRule<MainActivity> mActivityRule = new IntentsTestRule<MainActivity>(MainActivity.class);
 
@@ -53,18 +44,20 @@ public class AddPersonTest {
         onView(withId(R.id.listOfNamesButton3)).perform(click());
         onView(withId(R.id.button)).perform(click());
 
-        mockImage();
+        mockTakePhoto();
 
         onView(withId(R.id.nameInputText)).perform(typeText("Mr. Android"));
         Espresso.closeSoftKeyboard();
+
+        onView(withId(R.id.addPersonErrorTextView)).check(matches(withText(""))); //sjekker at det ikke er noen feilmeldinger
+
         onView(withId(R.id.saveButton)).perform(click());
     }
 
     /**
      * mocks the image, so the test does not open the camera.
      */
-
-    private void mockImage(){
+    private void mockTakePhoto(){
         Bitmap icon = BitmapFactory.decodeResource(
                 InstrumentationRegistry.getTargetContext().getResources(),
                 R.mipmap.ic_launcher);
@@ -83,5 +76,17 @@ public class AddPersonTest {
 
         // We can also validate that an intent resolving to the "camera" activity has been sent out by our app
         intended(toPackage("com.android.camera"));
+    }
+
+    @Test
+    public void testGetsErrorMessageIfImageIsNotPresent(){
+        onView(withId(R.id.listOfNamesButton3)).perform(click());
+        onView(withId(R.id.button)).perform(click());
+        onView(withId(R.id.nameInputText)).perform(typeText("Mr. Android"));
+        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.saveButton)).perform(click());
+
+        //sjekker at det ikke er en tom streng i feilmeldingen
+        onView(withId(R.id.addPersonErrorTextView)).check(matches(not(withText(""))));
     }
 }

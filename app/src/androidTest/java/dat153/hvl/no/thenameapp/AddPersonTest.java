@@ -89,4 +89,15 @@ public class AddPersonTest {
         //sjekker at det ikke er en tom streng i feilmeldingen
         onView(withId(R.id.addPersonErrorTextView)).check(matches(not(withText(""))));
     }
+
+    @Test
+    public void testGetsErrorMessageIfNameIsNotPresent(){
+        onView(withId(R.id.listOfNamesButton3)).perform(click());
+        onView(withId(R.id.button)).perform(click());
+        mockTakePhoto();
+        onView(withId(R.id.saveButton)).perform(click());
+
+        //sjekker at det ikke er en tom streng i feilmeldingen
+        onView(withId(R.id.addPersonErrorTextView)).check(matches(not(withText(""))));
+    }
 }

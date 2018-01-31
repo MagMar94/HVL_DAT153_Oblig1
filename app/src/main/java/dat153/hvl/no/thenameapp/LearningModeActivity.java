@@ -8,6 +8,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,17 +43,19 @@ public class LearningModeActivity extends AppCompatActivity {
 
         String guessedName = getTheGuess(v);
         Boolean ressult = compareTo(correctName, guessedName);
-        totaleNumberOfGuesses = totaleNumberOfGuesses+1;
-        if(ressult)
-            score = score+1;
+        totaleNumberOfGuesses = totaleNumberOfGuesses + 1;
+        if (ressult)
+            score = score + 1;
+
 
         updateScore();
+        ImageView iv = findViewById(R.id.randomPicture);
+        fadeOut(iv);
         setNewRandomPicture();
     }
 
     // generer tilfeldig tall
-    public static int randomNumber()
-    {
+    public static int randomNumber() {
         Random randomGenerator = new Random();
         int max = People.mInstance.mPeopleMap.size();
         int randomNum = randomGenerator.nextInt(max);
@@ -59,8 +64,7 @@ public class LearningModeActivity extends AppCompatActivity {
     }
 
 
-    public void setNewRandomPicture()
-    {
+    public void setNewRandomPicture() {
         int ranNum = randomNumber();
 
         Drawable imageFromHashMap = (Drawable) People.mInstance.mPeopleMap.keySet().toArray()[ranNum];
@@ -70,19 +74,18 @@ public class LearningModeActivity extends AppCompatActivity {
 
         ImageView pictureOfPersonView = findViewById(R.id.randomPicture);
         pictureOfPersonView.setImageBitmap(bitmapImage.getBitmap());
+        fadeIn(pictureOfPersonView);
     }
 
 
     // samelingn to tekster
-    public boolean compareTo(String one, String two)
-    {
+    public boolean compareTo(String one, String two) {
         return (one.equals(two));
     }
 
 
     // tar imot innput
-    public String getTheGuess(View view)
-    {
+    public String getTheGuess(View view) {
         EditText inputTextView = findViewById(R.id.guessText);
         String inputGuess = inputTextView.getText().toString();
 
@@ -91,16 +94,14 @@ public class LearningModeActivity extends AppCompatActivity {
 
 
     // update score
-    public void updateScore()
-    {
+    public void updateScore() {
         TextView scoreBord = findViewById(R.id.score);
         String scoreText = "" + score + "/" + totaleNumberOfGuesses;
         scoreBord.setText(scoreText);
     }
 
     // quit
-    public void quitButton(View view)
-    {
+    public void quitButton(View view) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -118,5 +119,23 @@ public class LearningModeActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void fadeIn(final ImageView img) {
+        int fadeInDuration = 1000;
+        Animation fadeIn = new AlphaAnimation(0,1);
+        fadeIn.setInterpolator(new AccelerateInterpolator());
+        fadeIn.setDuration(fadeInDuration);
+        img.setAnimation(fadeIn);
+        img.startAnimation(fadeIn);
 
+    }
+
+    private void fadeOut(final ImageView img) {
+        int fadeOutDuration = 1000;
+        Animation fadeOut = new AlphaAnimation(1,0);
+        fadeOut.setInterpolator(new AccelerateInterpolator());
+        fadeOut.setDuration(fadeOutDuration);
+        img.setAnimation(fadeOut);
+        img.startAnimation(fadeOut);
+
+    }
 }

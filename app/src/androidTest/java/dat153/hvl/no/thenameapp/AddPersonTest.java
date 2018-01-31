@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -36,6 +37,8 @@ import static org.hamcrest.core.IsNot.not;
  */
 @RunWith(AndroidJUnit4.class)
 public class AddPersonTest {
+    private int numberOfDefaultUsers = 3;
+
     @Rule
     public IntentsTestRule<MainActivity> mActivityRule = new IntentsTestRule<MainActivity>(MainActivity.class);
 
@@ -99,5 +102,20 @@ public class AddPersonTest {
 
         //sjekker at det ikke er en tom streng i feilmeldingen
         onView(withId(R.id.addPersonErrorTextView)).check(matches(not(withText(""))));
+    }
+
+    @Test
+    public void testListGetsUpdatedWithNewPerson(){
+        onView(withId(R.id.listOfNamesButton3)).perform(click());
+        onView (withId (R.id.list_View)).check (ViewAssertions.matches (ListViewMatcher.withListSize (numberOfDefaultUsers)));
+        onView(withId(R.id.button)).perform(click());
+
+        mockTakePhoto();
+
+        onView(withId(R.id.nameInputText)).perform(typeText("Mr. Android"));
+        Espresso.closeSoftKeyboard();
+
+        onView(withId(R.id.saveButton)).perform(click());
+        onView (withId (R.id.list_View)).check (ViewAssertions.matches (ListViewMatcher.withListSize (numberOfDefaultUsers+1)));
     }
 }

@@ -3,6 +3,7 @@ package dat153.hvl.no.thenameapp;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,8 +35,8 @@ public class LearningModeTest {
     @Rule
     public ActivityTestRule<LearningModeActivity> mActivityRule = new ActivityTestRule<LearningModeActivity>(LearningModeActivity.class);
 
-    @Test
-    public void correctGuessGivesOnePoint(){
+    @Before
+    public void setRandomSeedAndFirstImage(){
         //Set up the test so we know what order the images will appear in
         mActivityRule.getActivity().setRandomSeed(1337);
 
@@ -49,8 +50,10 @@ public class LearningModeTest {
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
+    }
 
-
+    @Test
+    public void correctGuessGivesOnePoint(){
         //The test
         onView(withId(R.id.score)).check(matches(withText("0/0")));
         onView(withId(R.id.guessText)).perform(typeText(stephanie));
@@ -61,20 +64,6 @@ public class LearningModeTest {
 
     @Test
     public void wrongGuessGivesNoPoints(){
-        //Set up the test so we know what order the images will appear in
-        mActivityRule.getActivity().setRandomSeed(1337);
-
-        try {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mActivityRule.getActivity().setNewRandomPicture();
-                }
-            });
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-
         //The test
         onView(withId(R.id.score)).check(matches(withText("0/0")));
         onView(withId(R.id.guessText)).perform(typeText(magnus));
@@ -84,21 +73,7 @@ public class LearningModeTest {
     }
 
     @Test
-    public void correctScoreWithThreeGuesses(){
-        //Set up the test so we know what order the images will appear in
-        mActivityRule.getActivity().setRandomSeed(1337);
-
-        try {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mActivityRule.getActivity().setNewRandomPicture();
-                }
-            });
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-
+    public void correctScoreWithThreeCorrectGuesses(){
         //The test
         onView(withId(R.id.score)).check(matches(withText("0/0")));
         onView(withId(R.id.guessText)).perform(typeText(stephanie));
@@ -113,5 +88,23 @@ public class LearningModeTest {
         closeSoftKeyboard();
         onView(withId(R.id.button2)).perform(click());
         onView(withId(R.id.score)).check(matches(withText("3/3")));
+    }
+
+    @Test
+    public void correctScoreWithThreeGuessesOneMiss(){
+        //The test
+        onView(withId(R.id.score)).check(matches(withText("0/0")));
+        onView(withId(R.id.guessText)).perform(typeText(stephanie));
+        closeSoftKeyboard();
+        onView(withId(R.id.button2)).perform(click());
+        onView(withId(R.id.score)).check(matches(withText("1/1")));
+        onView(withId(R.id.guessText)).perform(typeText(adrian));
+        closeSoftKeyboard();
+        onView(withId(R.id.button2)).perform(click());
+        onView(withId(R.id.score)).check(matches(withText("1/2")));
+        onView(withId(R.id.guessText)).perform(typeText(adrian));
+        closeSoftKeyboard();
+        onView(withId(R.id.button2)).perform(click());
+        onView(withId(R.id.score)).check(matches(withText("2/3")));
     }
 }

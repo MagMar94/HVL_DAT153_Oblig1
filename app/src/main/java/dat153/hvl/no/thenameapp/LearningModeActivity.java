@@ -1,7 +1,6 @@
 package dat153.hvl.no.thenameapp;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,49 +19,66 @@ import java.util.Random;
 public class LearningModeActivity extends AppCompatActivity {
     private String correctName;
     private int score;
-    private int totaleNumberOfGuesses;
+    private int totalNumberOfGuesses;
+    private Random randomGenerator;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        randomGenerator = new Random();
         setContentView(R.layout.activity_learning_mode);
         score = 0;
-        totaleNumberOfGuesses = 0;
+        totalNumberOfGuesses = 0;
         updateScore();
         setNewRandomPicture();
     }
 
+    /**
+     * Submits the answer
+     *
+     * @param v current view
+     */
     public void submit(View v) {
-
-        /*if (v != null){ //hides the on screen keyboard
-            InputMethodManager inputs = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputs.hideSoftInputFromWindow(v.getWindowToken(),0);
-        }*/
-
         String guessedName = getTheGuess(v);
-        Boolean ressult = compareTo(correctName, guessedName);
-        totaleNumberOfGuesses = totaleNumberOfGuesses + 1;
-        if (ressult)
+        totalNumberOfGuesses = totalNumberOfGuesses + 1;
+        if (correctName.equals(guessedName))
             score = score + 1;
-
 
         updateScore();
         ImageView iv = findViewById(R.id.randomPicture);
         fadeOut(iv);
         setNewRandomPicture();
+        EditText inputField = findViewById(R.id.guessText);
+        inputField.setText("");
     }
 
-    // generer tilfeldig tall
-    public static int randomNumber() {
-        Random randomGenerator = new Random();
-        int max = People.mInstance.mPeopleMap.size();
-        int randomNum = randomGenerator.nextInt(max);
-
-        return randomNum;
+    /**
+     * Updates the displayed score
+     */
+    private void updateScore() {
+        TextView scoreBord = findViewById(R.id.score);
+        String scoreText = "" + score + "/" + totalNumberOfGuesses;
+        scoreBord.setText(scoreText);
     }
 
+    /**
+     * Gets the guessed name
+     *
+     * @param view
+     * @return the guessed name
+     */
+    private String getTheGuess(View view) {
+        EditText inputTextView = findViewById(R.id.guessText);
+        String inputGuess = inputTextView.getText().toString();
 
+        return inputGuess;
+    }
+
+    /**
+     * Sets a random piture on the screen
+     */
     public void setNewRandomPicture() {
         int ranNum = randomNumber();
 
@@ -77,27 +92,16 @@ public class LearningModeActivity extends AppCompatActivity {
         fadeIn(pictureOfPersonView);
     }
 
+    /**
+     * Genererates a random number
+     *
+     * @return a random number
+     */
+    private int randomNumber() {
+        int max = People.mInstance.mPeopleMap.size();
+        int randomNum = randomGenerator.nextInt(max);
 
-    // samelingn to tekster
-    public boolean compareTo(String one, String two) {
-        return (one.equals(two));
-    }
-
-
-    // tar imot innput
-    public String getTheGuess(View view) {
-        EditText inputTextView = findViewById(R.id.guessText);
-        String inputGuess = inputTextView.getText().toString();
-
-        return inputGuess;
-    }
-
-
-    // update score
-    public void updateScore() {
-        TextView scoreBord = findViewById(R.id.score);
-        String scoreText = "" + score + "/" + totaleNumberOfGuesses;
-        scoreBord.setText(scoreText);
+        return randomNum;
     }
 
     // quit
@@ -105,7 +109,7 @@ public class LearningModeActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        String scoreText = "" + score + "/" + totaleNumberOfGuesses;
+        String scoreText = "" + score + "/" + totalNumberOfGuesses;
 
         builder.setMessage(scoreText).setTitle(R.string.quit_dialog_title);
 
@@ -117,6 +121,17 @@ public class LearningModeActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    /**
+     * Used for testing. Sets the seed that the random generator uses.
+     *
+     * Sets a new random picture so the first
+     *
+     * @param seed
+     */
+    public void setRandomSeed(long seed){
+        randomGenerator.setSeed(seed);
     }
 
     private void fadeIn(final ImageView img) {

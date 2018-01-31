@@ -13,11 +13,13 @@ import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -30,6 +32,7 @@ import static android.support.test.espresso.intent.matcher.IntentMatchers.toPack
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.core.IsNot.not;
 
 /**
@@ -38,6 +41,7 @@ import static org.hamcrest.core.IsNot.not;
 @RunWith(AndroidJUnit4.class)
 public class AddPersonTest {
     private int numberOfDefaultUsers = 3;
+    private String[] namesToBeRegistered = {"Skynet", "Mr. Android"};
 
     @Rule
     public IntentsTestRule<MainActivity> mActivityRule = new IntentsTestRule<MainActivity>(MainActivity.class);
@@ -49,7 +53,7 @@ public class AddPersonTest {
 
         mockTakePhoto();
 
-        onView(withId(R.id.nameInputText)).perform(typeText("Mr. Android"));
+        onView(withId(R.id.nameInputText)).perform(typeText(namesToBeRegistered[0]));
         Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.addPersonErrorTextView)).check(matches(withText(""))); //sjekker at det ikke er noen feilmeldinger
@@ -85,7 +89,7 @@ public class AddPersonTest {
     public void testGetsErrorMessageIfImageIsNotPresent(){
         onView(withId(R.id.listOfNamesButton3)).perform(click());
         onView(withId(R.id.button)).perform(click());
-        onView(withId(R.id.nameInputText)).perform(typeText("Mr. Android"));
+        onView(withId(R.id.nameInputText)).perform(typeText(namesToBeRegistered[0]));
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.saveButton)).perform(click());
 
@@ -107,15 +111,15 @@ public class AddPersonTest {
     @Test
     public void testListGetsUpdatedWithNewPerson(){
         onView(withId(R.id.listOfNamesButton3)).perform(click());
-        onView (withId (R.id.list_View)).check (ViewAssertions.matches (ListViewMatcher.withListSize (numberOfDefaultUsers)));
+        onView (withId (R.id.list_View)).check (ViewAssertions.matches (ListViewMatcher.withListSize (numberOfDefaultUsers))); //sjekker at listen kun inneholder et likt antall som det er default navn
         onView(withId(R.id.button)).perform(click());
 
         mockTakePhoto();
 
-        onView(withId(R.id.nameInputText)).perform(typeText("Mr. Android"));
+        onView(withId(R.id.nameInputText)).perform(typeText(namesToBeRegistered[0]));
         Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.saveButton)).perform(click());
-        onView (withId (R.id.list_View)).check (ViewAssertions.matches (ListViewMatcher.withListSize (numberOfDefaultUsers+1)));
+        onView (withId (R.id.list_View)).check (ViewAssertions.matches (ListViewMatcher.withListSize (numberOfDefaultUsers+1))); //sjekker at listen inneholder en mer enn default navnene
     }
 }

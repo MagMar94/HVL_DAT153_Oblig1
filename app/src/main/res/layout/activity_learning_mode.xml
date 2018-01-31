@@ -35,7 +35,7 @@
         android:focusedByDefault="false"
         android:inputType="textPersonName|textCapWords"
         android:selectAllOnFocus="true"
-        android:text="@string/default_name_text"
+        android:hint="Guess who?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/randomPicture" />
 

@@ -67,7 +67,7 @@ public class AddPersonTest {
     private void mockTakePhoto(){
         Bitmap icon = BitmapFactory.decodeResource(
                 InstrumentationRegistry.getTargetContext().getResources(),
-                R.mipmap.ic_launcher);
+                R.drawable.rabbit1);
 
         // Build a result to return from the Camera app
         Intent resultData = new Intent();
@@ -77,12 +77,10 @@ public class AddPersonTest {
         // Stub out the Camera. When an intent is sent to the Camera, this tells Espresso to respond
         // with the ActivityResult we just created
         intending(toPackage("com.android.camera")).respondWith(result);
+        intending(toPackage("com.android.camera2")).respondWith(result);
 
         // Now that we have the stub in place, click on the button in our app that launches into the Camera
         onView(withId(R.id.takePictureButton)).perform(click());
-
-        // We can also validate that an intent resolving to the "camera" activity has been sent out by our app
-        intended(toPackage("com.android.camera"));
     }
 
     @Test

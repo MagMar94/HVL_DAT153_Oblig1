@@ -40,6 +40,7 @@ public class NameListActivity extends AppCompatActivity {
         AdapterView.OnItemClickListener nameClickedHandler = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                setTitle(People.mInstance.mPeopleMap.values().toArray()[i].toString());
                 setContentView(R.layout.activity_show_picture);
                 ImageView iw = findViewById(R.id.displayPersonImage);
                 BitmapDrawable image = (BitmapDrawable) People.mInstance.mPeopleMap.keySet().toArray()[i];

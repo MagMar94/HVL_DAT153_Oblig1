@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Magnus on 18.01.2018.
@@ -22,7 +23,7 @@ class People extends Application {
     /**
      * The HashMap containing the names and image
      */
-    public HashMap<Drawable, String> mPeopleMap;
+    public Map<Drawable, String> mPeopleMap;
 
     private People() {
         mPeopleMap = new HashMap<>();

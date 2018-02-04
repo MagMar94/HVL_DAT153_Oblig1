@@ -15,4 +15,6 @@
     <string name="quit_button_text">Quit</string>
     <string name="quit_dialog_title">Your Score: </string>
     <string name="ok">OK</string>
+    <string name="your_name_settings_text">Your name</string>
+    <string name="empty_string"></string>
 </resources>

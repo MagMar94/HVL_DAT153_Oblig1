@@ -2,6 +2,7 @@ package dat153.hvl.no.thenameapp;
 
 import android.app.Application;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 
 /**
  * Created by Magnus on 31.01.2018.
@@ -12,6 +13,7 @@ public class NameAppContext extends Application {
     public void onCreate(){
         super.onCreate();
 
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         if(People.mInstance.mPeopleMap.isEmpty())
             initiateStudentList();
     }

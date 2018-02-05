@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Navneappen</string>
+    <string name="take_picture_button_text">Ta bilde</string>
+    <string name="save_button_text">Lagre</string>
+    <string name="add_person_name_default_text">Legg til navn</string>
+    <string name="add_new_person_button_text">Legg til ny person</string>
+    <string name="answer_button_text">Svar</string>
+    <string name="quit_button_text">Avslutt</string>
+    <string name="quit_dialog_title">Ditt resultat:</string>
+    <string name="ok">OK</string>
+    <string name="your_name_settings_text">Ditt navn</string>
+    <string name="default_name_text">Gjett hvem?</string>
+    <string name="name_list_button_text">Liste med navn</string>
+    <string name="image_list_button_text">Bildegalleri</string>
+    <string name="learning_mode_button_text">Læringsmodus</string>
+    <string name="invalid_name_and_image_error">Ugyldig navn og bilde</string>
+    <string name="invalid_image_error">Ugylig bilde</string>
+    <string name="invalid_name_error">Ugyldig navn</string>
+</resources>

@@ -45,6 +45,7 @@ public class NameListActivity extends AppCompatActivity {
                 case LIST:
                     super.onBackPressed();
                 case PERSON:
+                    setTitle(R.string.app_name);
                     setContentView(R.layout.activity_name_list);
                     fillList();
                     displayedLayout = DisplayedLayout.LIST;
@@ -72,7 +73,6 @@ public class NameListActivity extends AppCompatActivity {
                 ImageView iw = findViewById(R.id.displayPersonImage);
                 BitmapDrawable image = (BitmapDrawable) People.mInstance.mPeopleMap.keySet().toArray()[i];
                 iw.setImageDrawable(image);
-
             }
         };
 

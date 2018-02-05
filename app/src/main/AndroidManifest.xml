@@ -37,6 +37,12 @@
         <activity android:name=".AddPersonActivity"
             android:parentActivityName=".NameListActivity">
         </activity>
+        <activity
+            android:name=".UserSettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_IMAGE_CAPTURE"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

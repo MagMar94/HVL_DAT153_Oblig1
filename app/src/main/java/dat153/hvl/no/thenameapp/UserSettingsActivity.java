@@ -118,6 +118,8 @@ public class UserSettingsActivity extends AppCompatActivity {
         Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
 
         legIHash();
+
+        finish();
     }
 
     // returnerer bilde fra sharedPref som string

@@ -46,6 +46,8 @@ public class NameAppContext extends Application {
         else
             {
                 Intent startNewActivity = new Intent(this, UserSettingsActivity.class);
+                startNewActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 startActivity(startNewActivity);
             }
 

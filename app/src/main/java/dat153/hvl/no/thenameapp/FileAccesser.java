@@ -15,7 +15,7 @@ import java.io.FileOutputStream;
  * Created by Magnus on 05.02.2018.
  */
 
-public class Database {
+public class FileAccesser {
     String FILENAME = "my_img";
 
     /**

@@ -56,7 +56,7 @@ public class LearningModeTest {
     public void correctGuessGivesOnePoint(){
         //The test
         onView(withId(R.id.score)).check(matches(withText("0/0")));
-        onView(withId(R.id.guessText)).perform(typeText(stephanie));
+        onView(withId(R.id.guessText)).perform(typeText(adrian));
         closeSoftKeyboard();
         onView(withId(R.id.button2)).perform(click());
         onView(withId(R.id.score)).check(matches(withText("1/1")));
@@ -76,7 +76,7 @@ public class LearningModeTest {
     public void correctScoreWithThreeCorrectGuesses(){
         //The test
         onView(withId(R.id.score)).check(matches(withText("0/0")));
-        onView(withId(R.id.guessText)).perform(typeText(stephanie));
+        onView(withId(R.id.guessText)).perform(typeText(adrian));
         closeSoftKeyboard();
         onView(withId(R.id.button2)).perform(click());
         onView(withId(R.id.score)).check(matches(withText("1/1")));
@@ -84,7 +84,7 @@ public class LearningModeTest {
         closeSoftKeyboard();
         onView(withId(R.id.button2)).perform(click());
         onView(withId(R.id.score)).check(matches(withText("2/2")));
-        onView(withId(R.id.guessText)).perform(typeText(adrian));
+        onView(withId(R.id.guessText)).perform(typeText(stephanie));
         closeSoftKeyboard();
         onView(withId(R.id.button2)).perform(click());
         onView(withId(R.id.score)).check(matches(withText("3/3")));
@@ -94,7 +94,7 @@ public class LearningModeTest {
     public void correctScoreWithThreeGuessesOneMiss(){
         //The test
         onView(withId(R.id.score)).check(matches(withText("0/0")));
-        onView(withId(R.id.guessText)).perform(typeText(stephanie));
+        onView(withId(R.id.guessText)).perform(typeText(adrian));
         closeSoftKeyboard();
         onView(withId(R.id.button2)).perform(click());
         onView(withId(R.id.score)).check(matches(withText("1/1")));
@@ -102,7 +102,7 @@ public class LearningModeTest {
         closeSoftKeyboard();
         onView(withId(R.id.button2)).perform(click());
         onView(withId(R.id.score)).check(matches(withText("1/2")));
-        onView(withId(R.id.guessText)).perform(typeText(adrian));
+        onView(withId(R.id.guessText)).perform(typeText(stephanie));
         closeSoftKeyboard();
         onView(withId(R.id.button2)).perform(click());
         onView(withId(R.id.score)).check(matches(withText("2/3")));

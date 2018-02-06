@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/HVL_DAT153_Oblig1.iml" filepath="$PROJECT_DIR$/HVL_DAT153_Oblig1.iml" />
       <module fileurl="file://C:\Users\Adrian\Desktop\DAT153\Oblig2\HVL_DAT153_Oblig1-2\HVL_DAT153_Oblig1.iml" filepath="C:\Users\Adrian\Desktop\DAT153\Oblig2\HVL_DAT153_Oblig1-2\HVL_DAT153_Oblig1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/HVL_DAT153_Oblig1-2.iml" filepath="$PROJECT_DIR$/.idea/HVL_DAT153_Oblig1-2.iml" />
+      <module fileurl="file://C:\Users\steph_000\Documents\DAT153\HVL_DAT153_Oblig1\.idea\HVL_DAT153_Oblig1-2.iml" filepath="C:\Users\steph_000\Documents\DAT153\HVL_DAT153_Oblig1\.idea\HVL_DAT153_Oblig1-2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

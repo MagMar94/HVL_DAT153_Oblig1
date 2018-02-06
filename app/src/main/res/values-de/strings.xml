@@ -13,7 +13,7 @@
     <string name="invalid_name_and_image_error">Ungültiger Name und Bild</string>
     <string name="default_name_text">Rate mal wer?</string>
     <string name="answer_button_text">Antworten</string>
-    <string name="quit_button_text">Ausfahrt</string>
+    <string name="quit_button_text">Beenden</string>
     <string name="quit_dialog_title">Dein Ergebnis:</string>
     <string name="ok">OK</string>
     <string name="your_name_settings_text">Dein Name</string>
